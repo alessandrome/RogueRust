@@ -1,5 +1,8 @@
+mod types;
+mod structures;
+
 pub struct Tile {
-    id: usize,
+    id: u32,
     name: String,
     symbol: char,
     traversal_cost: Option<u16>,

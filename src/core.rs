@@ -1,4 +1,7 @@
 mod character;
 mod tile;
 mod tile_zone;
-mod world;
+pub mod world;
+pub mod command;
+mod map_object;
+mod map;

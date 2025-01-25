@@ -1,4 +1,4 @@
-use super::tile::{Tile};
+use tile::{Tile};
 
 pub struct TileZone {
     width: usize,
@@ -13,6 +13,18 @@ impl TileZone {
             width,
             height,
             tiles_grid,
+        }
+    }
+}
+
+pub struct WorldGrid {
+    grid: Vec<Vec<TileZone>>,
+}
+
+impl WorldGrid {
+    pub fn new() -> Self {
+        Self {
+            grid: Vec::new(),
         }
     }
 }
