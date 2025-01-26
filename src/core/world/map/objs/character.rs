@@ -2,12 +2,12 @@ pub mod traits;
 mod common_attributes;
 
 use traits::{CharacterEntity};
+use crate::core::world::map::objs::ObjAttributes;
 
 #[derive(Debug)]
 pub struct Character<T: CharacterEntity> {
-    id: usize,
+    // obj_attributes: ObjAttributes,
     entity: T,
-    name: String,
     health: i32,
     mana: i32,
     stamina: i32,
@@ -15,10 +15,10 @@ pub struct Character<T: CharacterEntity> {
 
 impl<T: CharacterEntity> Character<T> {
     pub fn new(name: String, entity: T) -> Self {
+        // let ObjAttributes =
         Self {
-            id: 0,
+            // obj_attributes:
             entity,
-            name,
             health: 0,
             mana: 0,
             stamina: 0,
