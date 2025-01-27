@@ -1,5 +1,5 @@
-use map::objs::character::traits::{CharacterEntity};
-use map::objs::character::Character;
+use objs::character::traits::CharacterEntity;
+use objs::character::Character;
 use crate::core::command::GameCommand;
 use map::tile_zone::WorldGrid;
 use crate::core::world::world_time::WorldTime;
@@ -7,6 +7,7 @@ use crate::core::world::world_time::WorldTime;
 mod world_time;
 mod weather;
 mod map;
+pub mod objs;
 
 pub struct World {
     pg: Character,
