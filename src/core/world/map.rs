@@ -1,2 +1,2 @@
-pub mod tile_zone;
+pub mod world_grid;
 pub mod tile;

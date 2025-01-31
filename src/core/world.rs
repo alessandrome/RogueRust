@@ -1,7 +1,8 @@
 use objs::character::traits::CharacterEntity;
-use objs::character::Character;
+use objs::character::{Character, CharacterAttributes};
+use objs::{Build, ObjAttributes};
+use map::world_grid::WorldGrid;
 use crate::core::command::GameCommand;
-use map::tile_zone::WorldGrid;
 use crate::core::world::world_time::WorldTime;
 
 mod world_time;
@@ -19,7 +20,16 @@ pub struct World {
 
 impl World {
     pub fn new() -> Self {
-        let pg = Character::new("Player".to_string());
+        let pg = Character::build(
+            CharacterAttributes {
+                obj_attributes: ObjAttributes {
+                    id: 0,
+                    name: "Player".to_string(),
+                },
+                health: 10,
+            }
+        );
+        
         World {
             pg,
             npc_list: Vec::new(),
@@ -34,6 +44,7 @@ impl World {
             match command {
                 GameCommand::Move(direction) => {}
                 GameCommand::MoveTo(x, y) => {}
+                GameCommand::Interact(interactable) => {}
                 GameCommand::Pause => {}
             }
         }

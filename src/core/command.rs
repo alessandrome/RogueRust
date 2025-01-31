@@ -1,3 +1,5 @@
+use super::world::objs::interaction::Interactable;
+
 #[derive(Copy, Clone, Debug)]
 pub enum MoveDirection {
     Up,
@@ -10,5 +12,6 @@ pub enum MoveDirection {
 pub enum GameCommand {
     Move(MoveDirection),
     MoveTo(i32, i32),
+    Interact(dyn Interactable),
     Pause,
 }
