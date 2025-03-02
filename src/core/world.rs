@@ -9,6 +9,7 @@ mod world_time;
 mod weather;
 mod map;
 pub mod objs;
+mod event;
 
 pub struct World {
     pg: Character,
