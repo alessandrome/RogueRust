@@ -1,0 +1,26 @@
+[
+  {
+    "id": "grass",
+    "name": "Grass",
+    "symbol": "w",
+    "walking_cost": 1
+  },
+  {
+    "id": "wood",
+    "name": "Wood",
+    "symbol": "T",
+    "walking_cost": 1
+  },
+  {
+    "id": "mount",
+    "name": "Mount",
+    "symbol": "A",
+    "walking_cost": 2
+  },
+  {
+    "id": "water",
+    "name": "Water",
+    "symbol": "~",
+    "walking_cost": 2
+  }
+]
