@@ -1,5 +1,6 @@
 mod types;
 mod structures;
+mod effect;
 
 pub struct Tile {
     id: u32,
