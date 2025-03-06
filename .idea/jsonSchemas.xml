@@ -3,6 +3,23 @@
   <component name="JsonSchemaMappingsProjectConfiguration">
     <state>
       <map>
+        <entry key="RogueRust - Ambients">
+          <value>
+            <SchemaInfo>
+              <option name="generatedName" value="New Schema" />
+              <option name="name" value="RogueRust - Ambients" />
+              <option name="relativePathToSchema" value="src/core/world/map/conf/schema/ambients.config.json" />
+              <option name="schemaVersion" value="JSON Schema 202,012" />
+              <option name="patterns">
+                <list>
+                  <Item>
+                    <option name="path" value="src/core/world/map/conf/ambients.json" />
+                  </Item>
+                </list>
+              </option>
+            </SchemaInfo>
+          </value>
+        </entry>
         <entry key="RogueRust - Tiles">
           <value>
             <SchemaInfo>

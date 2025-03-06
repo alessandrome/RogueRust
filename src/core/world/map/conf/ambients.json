@@ -1,0 +1,20 @@
+[
+  {
+    "id": "wood",
+    "name": "Wood",
+    "ambient_type": "open_world",
+    "attributes": {
+
+    },
+    "tiles": [""]
+  },
+  {
+    "id": "dungeon",
+    "name": "Dungeon",
+    "ambient_type": "dungeon",
+    "attributes": {
+      "max_rooms": 8
+    },
+    "room_types": {}
+  }
+]

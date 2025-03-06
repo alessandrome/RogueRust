@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "properties": {
+      "id": { "type": "string" },
+      "name": { "type": "string" },
+      "ambient_type": {
+        "type": "string",
+        "enum": ["open_world", "dungeon"]
+      },
+      "attributes": {"type": "object"}
+    },
+    "required": ["id", "ambient_type", "attributes"],
+
+    "if": {
+      "properties": { "ambient_type": { "enum": ["open_world"] } }
+    },
+    "then": {
+
+    },
+    "else": {
+      "if": {
+        "properties": { "ambient_type": { "enum": ["dungeon"] } }
+      },
+      "then": {
+        "required": ["room_types"],
+        "properties": {
+          "attributes": {
+            "properties": {
+              "max_rooms": {"type": "integer"}
+            },
+            "required": ["max_rooms"]
+          }
+        }
+      }
+    }
+  }
+}
