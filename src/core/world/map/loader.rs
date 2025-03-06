@@ -14,6 +14,9 @@ impl MapItemPrototypesLoader {
     pub fn new() -> MapItemPrototypesLoader {
         MapItemPrototypesLoader {
             paths: Vec::new(),
+            tiles: vec![],
+            environments: vec![],
+            biomes: vec![],
         }
     }
     
