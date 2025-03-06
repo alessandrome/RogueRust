@@ -6,23 +6,23 @@
     "properties": {
       "id": { "type": "string" },
       "name": { "type": "string" },
-      "ambient_type": {
+      "env_type": {
         "type": "string",
         "enum": ["open_world", "dungeon"]
       },
       "attributes": {"type": "object"}
     },
-    "required": ["id", "ambient_type", "attributes"],
+    "required": ["id", "env_type", "attributes"],
 
     "if": {
-      "properties": { "ambient_type": { "enum": ["open_world"] } }
+      "properties": { "env_type": { "enum": ["open_world"] } }
     },
     "then": {
 
     },
     "else": {
       "if": {
-        "properties": { "ambient_type": { "enum": ["dungeon"] } }
+        "properties": { "env_type": { "enum": ["dungeon"] } }
       },
       "then": {
         "required": ["room_types"],

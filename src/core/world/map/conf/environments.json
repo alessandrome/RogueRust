@@ -2,7 +2,7 @@
   {
     "id": "wood",
     "name": "Wood",
-    "ambient_type": "open_world",
+    "env_type": "open_world",
     "attributes": {
 
     },
@@ -11,7 +11,7 @@
   {
     "id": "dungeon",
     "name": "Dungeon",
-    "ambient_type": "dungeon",
+    "env_type": "dungeon",
     "attributes": {
       "max_rooms": 8
     },

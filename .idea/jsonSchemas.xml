@@ -8,7 +8,7 @@
             <SchemaInfo>
               <option name="generatedName" value="New Schema" />
               <option name="name" value="RogueRust - Ambients" />
-              <option name="relativePathToSchema" value="src/core/world/map/conf/schema/ambients.config.json" />
+              <option name="relativePathToSchema" value="src/core/world/map/conf/schema/environments.config.json" />
               <option name="schemaVersion" value="JSON Schema 202,012" />
               <option name="patterns">
                 <list>
