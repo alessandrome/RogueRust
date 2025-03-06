@@ -23,4 +23,10 @@ impl MapItemPrototypesLoader {
     pub fn add_path<P: Into<PathBuf>>(&mut self, path: P) {
         self.paths.push(path.into());
     }
+    
+    pub fn load(&mut self) {
+        for path in &self.paths {
+            // TODO: load first Tiles, then Envs and lastly Biomes
+        }
+    }
 }
