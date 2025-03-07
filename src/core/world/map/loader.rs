@@ -24,7 +24,7 @@ pub struct MapItemPrototypesLoader {
 
 impl MapItemPrototypesLoader {
     pub fn new() -> MapItemPrototypesLoader {
-        let core_path = PathBuf::from(CONF_DIR).join(OBJS_DIR).join(CORE_OBJS_DIR);
+        let core_path = PathBuf::from(CORE_OBJS_DIR);
         MapItemPrototypesLoader {
             paths: vec![core_path],
             tiles: vec![],
@@ -47,5 +47,9 @@ impl MapItemPrototypesLoader {
             self.tiles = serde_json::from_reader(file_reader)?;
         }
         Ok(())
+    }
+    
+    pub fn get_tiles(&self) -> &Vec<Tile> {
+        &self.tiles
     }
 }
