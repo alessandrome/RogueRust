@@ -12,11 +12,11 @@ pub enum EventStatus {
 }
 
 pub trait EventHandler {
-    fn get_name() -> String;
-    fn get_description() -> String;
-    fn start() -> EventStatus;
-    fn update() -> EventStatus;
-    fn terminate() -> EventStatus;
+    fn get_name(&self) -> String;
+    fn get_description(&self) -> String;
+    fn start(&mut self) -> EventStatus;
+    fn update(&mut self) -> EventStatus;
+    fn terminate(&mut self) -> EventStatus;
 }
 
 pub struct Event {

@@ -8,10 +8,10 @@ pub enum MoveDirection {
     Right,
 }
 
-#[derive(Copy, Clone, Debug)]
-pub enum GameCommand {
+#[derive(Debug)]
+pub enum GameCommand<'a> {
     Move(MoveDirection),
     MoveTo(i32, i32),
-    Interact(dyn Interactable),
+    Interact(&'a dyn Interactable),
     Pause,
 }

@@ -4,6 +4,7 @@ mod common_attributes;
 use traits::{CharacterEntity};
 use super::{ObjAttributes, GameObject, Build};
 
+#[derive(Clone)]
 pub struct CharacterAttributes {
     pub obj_attributes: ObjAttributes,
     pub health: i32,

@@ -2,20 +2,23 @@ mod types;
 mod structures;
 mod effect;
 
+use serde::{Deserialize, Serialize};
+
+#[derive(Clone, Debug, Serialize, Deserialize)]
 pub struct Tile {
-    id: u32,
+    id: String,
     name: String,
     symbol: char,
-    traversal_cost: Option<u16>,
+    walking_cost: Option<u16>,
 }
 
 impl Tile {
     pub fn new_empty() -> Tile {
         Tile {
-            id: 0,
+            id: "null".to_string(),
             name: "Empty".to_string(),
             symbol: 'X',
-            traversal_cost: None,
+            walking_cost: None,
         }
     }
 }
