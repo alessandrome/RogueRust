@@ -14,6 +14,23 @@ const CONF_DIR: &str = "./conf";
 const OBJS_DIR: &str = "./conf/objs";
 const CORE_OBJS_DIR: &str = "./conf/objs/core";
 
+fn get_conf_core_path() -> PathBuf {
+    #[cfg(test)]
+    {
+        return PathBuf::from(env!("CARGO_MANIFEST_DIR"))
+            .join("src/core/world/map").join(CORE_OBJS_DIR);
+    }
+
+    #[cfg(not(test))]
+    {
+        let exe_dir = std::env::current_exe()
+            .expect("Failed to get current executable path")
+            .parent()
+            .expect("Executable has no parent directory")
+            .to_path_buf();
+        return exe_dir.join("conf");
+    }
+}
 
 pub struct MapItemPrototypesLoader {
     paths: Vec<PathBuf>,
@@ -24,7 +41,7 @@ pub struct MapItemPrototypesLoader {
 
 impl MapItemPrototypesLoader {
     pub fn new() -> MapItemPrototypesLoader {
-        let core_path = PathBuf::from(CORE_OBJS_DIR);
+        let core_path = get_conf_core_path();
         MapItemPrototypesLoader {
             paths: vec![core_path],
             tiles: vec![],
