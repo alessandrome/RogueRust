@@ -32,6 +32,7 @@ fn get_conf_core_path() -> PathBuf {
     }
 }
 
+#[derive(Debug)]
 pub struct MapItemPrototypesLoader {
     paths: Vec<PathBuf>,
     tiles: Vec<Tile>,
