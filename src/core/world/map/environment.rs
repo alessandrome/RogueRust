@@ -11,14 +11,20 @@ pub struct EnvRoomAttributes {
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct EnvTileAttributes {
+    id: String,
+    probability: u16, // Cumulative probability
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(tag = "env_type")]
 pub enum EnvType {
     OpenWorld {
-        tiles: Vec<String>
+        tiles: Vec<String>,
     },
     Dungeon {
         max_rooms: u8,
-        rooms: Vec<EnvRoomAttributes>
+        rooms: Vec<EnvRoomAttributes>,
     },
 }
 

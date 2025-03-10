@@ -21,7 +21,17 @@
       "properties": {
         "attributes": {
           "properties": {
-            "tiles": {"type": "array", "items": {"type": "string"} }
+            "tiles": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "id": {"type": "string"},
+                  "probability": {"type": "integer"}
+                },
+                "required": ["id", "probability"]
+              }
+            }
           },
           "required": ["tiles"]
         }
@@ -36,7 +46,10 @@
           "attributes": {
             "properties": {
               "max_rooms": {"type": "integer"},
-              "rooms": {"type": "array"}
+              "rooms": {
+                "type": "array",
+                "items": {}
+              }
             },
             "required": ["max_rooms", "rooms"]
           }
