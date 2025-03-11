@@ -1,3 +1,4 @@
+use std::collections::HashMap;
 use std::error::Error;
 use std::fs::File;
 use std::io::BufReader;
@@ -36,6 +37,7 @@ fn get_conf_core_path() -> PathBuf {
 pub struct MapItemPrototypesLoader {
     paths: Vec<PathBuf>,
     tiles: Vec<Tile>,
+    tiles_map: HashMap<String, usize>, // Map of tile "id" to vector position
     environments: Vec<Environment>,
     biomes: Vec<Biome>,
 }
@@ -46,6 +48,7 @@ impl MapItemPrototypesLoader {
         MapItemPrototypesLoader {
             paths: vec![core_path],
             tiles: vec![],
+            tiles_map: Default::default(),
             environments: vec![],
             biomes: vec![],
         }
@@ -63,6 +66,13 @@ impl MapItemPrototypesLoader {
             let file_reader = BufReader::new(tiles_file);
             // let json: serde_json::Value = serde_json::from_reader(file_reader)?;
             self.tiles = serde_json::from_reader(file_reader)?;
+            for i in 0..self.tiles.len() {
+                let tile_id = self.tiles[i].id().clone();
+                if self.tiles_map.contains_key(&tile_id) {
+                    return Err(format!("Tile with ID \"{}\" already exists!", tile_id).into());
+                }
+                self.tiles_map.insert(tile_id, i);
+            }
         }
         Ok(())
     }

@@ -21,4 +21,16 @@ impl Tile {
             walking_cost: None,
         }
     }
+
+    pub fn id(&self) -> &String {
+        &self.id
+    }
+
+    pub fn name(&self) -> &String {
+        &self.name
+    }
+
+    pub fn symbol(&self) -> char {
+        self.symbol
+    }
 }
