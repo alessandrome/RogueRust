@@ -39,6 +39,7 @@ pub struct MapItemPrototypesLoader {
     tiles: Vec<Tile>,
     tiles_map: HashMap<String, usize>, // Map of tile "id" to vector position
     environments: Vec<Environment>,
+    environments_map: HashMap<String, usize>,
     biomes: Vec<Biome>,
 }
 
@@ -50,6 +51,7 @@ impl MapItemPrototypesLoader {
             tiles: vec![],
             tiles_map: Default::default(),
             environments: vec![],
+            environments_map: Default::default(),
             biomes: vec![],
         }
     }
