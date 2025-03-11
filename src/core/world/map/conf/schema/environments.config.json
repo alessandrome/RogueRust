@@ -18,20 +18,40 @@
       "properties": { "env_type": { "enum": ["open_world"] } }
     },
     "then": {
-
+      "properties": {
+        "attributes": {
+          "properties": {
+            "tiles": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "id": {"type": "string"},
+                  "probability": {"type": "integer"}
+                },
+                "required": ["id", "probability"]
+              }
+            }
+          },
+          "required": ["tiles"]
+        }
+      }
     },
     "else": {
       "if": {
         "properties": { "env_type": { "enum": ["dungeon"] } }
       },
       "then": {
-        "required": ["room_types"],
         "properties": {
           "attributes": {
             "properties": {
-              "max_rooms": {"type": "integer"}
+              "max_rooms": {"type": "integer"},
+              "rooms": {
+                "type": "array",
+                "items": {}
+              }
             },
-            "required": ["max_rooms"]
+            "required": ["max_rooms", "rooms"]
           }
         }
       }

@@ -4,17 +4,16 @@
     "name": "Wood",
     "env_type": "open_world",
     "attributes": {
-
-    },
-    "tiles": [""]
+      "tiles": [""]
+    }
   },
   {
     "id": "dungeon",
     "name": "Dungeon",
     "env_type": "dungeon",
     "attributes": {
-      "max_rooms": 8
-    },
-    "room_types": {}
+      "max_rooms": 8,
+      "rooms": []
+    }
   }
 ]
