@@ -63,8 +63,10 @@ impl MapItemPrototypesLoader {
     pub fn load(&mut self) -> Result<(), Box<dyn Error>> {
         for path in &self.paths {
             // TODO: load first Tiles, then Envs and lastly Biomes
-            let tiles_json = path.join("tiles.json");
-            let tiles_file = File::open(&tiles_json).expect(format!("Tiles file \"{}\" not found!", tiles_json.display()).as_str());
+            // Tiles first!
+            let tiles_json = path.join(TILES_JSON_NAME);
+            let tiles_file = File::open(&tiles_json).expect(
+                format!("Tiles file \"{}\" not found!", tiles_json.display()).as_str());
             let file_reader = BufReader::new(tiles_file);
             // let json: serde_json::Value = serde_json::from_reader(file_reader)?;
             self.tiles = serde_json::from_reader(file_reader)?;
