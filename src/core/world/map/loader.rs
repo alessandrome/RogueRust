@@ -77,6 +77,16 @@ impl MapItemPrototypesLoader {
                 }
                 self.tiles_map.insert(tile_id, i);
             }
+
+            // It's Environments turn
+            let environments_json = path.join(ENVS_JSON_NAME);
+            let environments_file = File::open(&environments_json).expect(
+                format!("Environments file \"{}\" not found!", tiles_json.display()).as_str());
+            let file_reader = BufReader::new(environments_file);
+            self.environments = serde_json::from_reader(file_reader)?;
+            for i in 0..self.environments.len() {
+                // TODO: Mapping string id of env to index of its position in Vec (no duplicates IDs)
+            }
         }
         Ok(())
     }

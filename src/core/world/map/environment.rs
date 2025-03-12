@@ -17,10 +17,9 @@ pub struct EnvTileAttributes {
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
-#[serde(tag = "env_type")]
 pub enum EnvType {
     OpenWorld {
-        tiles: Vec<String>,
+        tiles: Vec<EnvTileAttributes>,
     },
     Dungeon {
         max_rooms: u8,

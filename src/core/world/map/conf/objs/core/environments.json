@@ -4,7 +4,10 @@
     "name": "Wood",
     "env_type": "open_world",
     "attributes": {
-      "tiles": [""]
+      "tiles": [
+        {"id": "tree", "probability": 90},
+        {"id": "grass", "probability": 10}
+      ]
     }
   },
   {
