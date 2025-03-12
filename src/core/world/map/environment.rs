@@ -17,6 +17,7 @@ pub struct EnvTileAttributes {
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
 pub enum EnvType {
     OpenWorld {
         tiles: Vec<EnvTileAttributes>,
