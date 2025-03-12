@@ -94,4 +94,7 @@ impl MapItemPrototypesLoader {
     pub fn get_tiles(&self) -> &Vec<Tile> {
         &self.tiles
     }
+    pub fn get_envs(&self) -> &Vec<Environment> {
+        &self.environments
+    }
 }

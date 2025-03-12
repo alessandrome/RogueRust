@@ -8,5 +8,8 @@ fn load() {
     //     println!("{:#?}", tile);
     // }
     println!("{:#?}", load_result);
+    // for tile in loader.get_envs() {
+    //     println!("{:#?}", tile);
+    // }
     assert!(load_result.is_ok());
 }
