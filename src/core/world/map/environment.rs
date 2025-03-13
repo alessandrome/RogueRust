@@ -34,3 +34,17 @@ pub struct Environment {
     name: String,
     attributes: EnvType,
 }
+
+impl Environment {
+    pub fn id(&self) -> &String {
+        &self.id
+    }
+    
+    pub fn name(&self) -> &String {
+        &self.name
+    }
+    
+    pub fn attributes(&self) -> &EnvType {
+        &self.attributes
+    }
+}
