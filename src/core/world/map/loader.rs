@@ -86,6 +86,11 @@ impl MapItemPrototypesLoader {
             self.environments = serde_json::from_reader(file_reader)?;
             for i in 0..self.environments.len() {
                 // TODO: Mapping string id of env to index of its position in Vec (no duplicates IDs)
+                let env_id = self.environments[i].id().clone();
+                if self.environments_map.contains_key(&env_id) {
+                    return Err(format!("Tile with ID \"{}\" already exists!", env_id).into());
+                }
+                // TODO: Check if all tiles used tiles correctly exist in memory
             }
         }
         Ok(())
