@@ -3,7 +3,7 @@ use serde_json::Value;
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct EnvRoomAttributes {
-    tiles: Vec<String>,
+    tiles: Vec<EnvTileAttributes>,
     min_width: u8,
     max_width: u8,
     min_height: u8,
@@ -14,6 +14,16 @@ pub struct EnvRoomAttributes {
 pub struct EnvTileAttributes {
     id: String,
     probability: u16, // Cumulative probability
+}
+
+impl EnvTileAttributes {
+    pub fn id(&self) -> &String {
+        &self.id
+    }
+
+    pub fn probability(&self) -> u16 {
+        self.probability
+    }
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
