@@ -3,7 +3,7 @@ use std::error::Error;
 use std::fs::File;
 use std::io::BufReader;
 use std::path::PathBuf;
-use crate::core::world::map::environment::Environment;
+use crate::core::world::map::environment::{EnvType, Environment};
 use crate::core::world::map::biome::Biome;
 use crate::core::world::map::tile::Tile;
 
@@ -85,12 +85,22 @@ impl MapItemPrototypesLoader {
             let file_reader = BufReader::new(environments_file);
             self.environments = serde_json::from_reader(file_reader)?;
             for i in 0..self.environments.len() {
-                // TODO: Mapping string id of env to index of its position in Vec (no duplicates IDs)
+                // Mapping string id of env to index of its position in Vec (no duplicates IDs)
                 let env_id = self.environments[i].id().clone();
                 if self.environments_map.contains_key(&env_id) {
                     return Err(format!("Tile with ID \"{}\" already exists!", env_id).into());
                 }
-                // TODO: Check if all tiles used tiles correctly exist in memory
+                // Check if all tiles used tiles correctly exist in memory
+                match self.environments[i].attributes() {
+                    EnvType::OpenWorld { tiles } => {
+                        for tile_attributes in tiles {
+                            if !self.tiles_map.contains_key(tile_attributes.id()) {
+                                return Err(format!("Tile ID \"{}\" doesn't exists!", tile_attributes.id()).into());
+                            }
+                        }
+                    }
+                    EnvType::Dungeon { .. } => {}
+                }
             }
         }
         Ok(())
