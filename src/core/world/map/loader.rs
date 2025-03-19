@@ -1,0 +1,115 @@
+use std::collections::HashMap;
+use std::error::Error;
+use std::fs::File;
+use std::io::BufReader;
+use std::path::PathBuf;
+use crate::core::world::map::environment::{EnvType, Environment};
+use crate::core::world::map::biome::Biome;
+use crate::core::world::map::tile::Tile;
+
+
+const TILES_JSON_NAME: &str = "tiles.json";
+const ENVS_JSON_NAME: &str = "environments.json";
+const BIOMES_JSON_NAME: &str = "biomes.json";
+const CONF_DIR: &str = "./conf";
+const OBJS_DIR: &str = "./conf/objs";
+const CORE_OBJS_DIR: &str = "./conf/objs/core";
+
+fn get_conf_core_path() -> PathBuf {
+    #[cfg(test)]
+    {
+        return PathBuf::from(env!("CARGO_MANIFEST_DIR"))
+            .join("src/core/world/map").join(CORE_OBJS_DIR);
+    }
+
+    #[cfg(not(test))]
+    {
+        let exe_dir = std::env::current_exe()
+            .expect("Failed to get current executable path")
+            .parent()
+            .expect("Executable has no parent directory")
+            .to_path_buf();
+        return exe_dir.join("conf");
+    }
+}
+
+#[derive(Debug)]
+pub struct MapItemPrototypesLoader {
+    paths: Vec<PathBuf>,
+    tiles: Vec<Tile>,
+    tiles_map: HashMap<String, usize>, // Map of tile "id" to vector position
+    environments: Vec<Environment>,
+    environments_map: HashMap<String, usize>,
+    biomes: Vec<Biome>,
+}
+
+impl MapItemPrototypesLoader {
+    pub fn new() -> MapItemPrototypesLoader {
+        let core_path = get_conf_core_path();
+        MapItemPrototypesLoader {
+            paths: vec![core_path],
+            tiles: vec![],
+            tiles_map: Default::default(),
+            environments: vec![],
+            environments_map: Default::default(),
+            biomes: vec![],
+        }
+    }
+    
+    pub fn add_path<P: Into<PathBuf>>(&mut self, path: P) {
+        self.paths.push(path.into());
+    }
+    
+    pub fn load(&mut self) -> Result<(), Box<dyn Error>> {
+        for path in &self.paths {
+            // TODO: load first Tiles, then Envs and lastly Biomes
+            // Tiles first!
+            let tiles_json = path.join(TILES_JSON_NAME);
+            let tiles_file = File::open(&tiles_json).expect(
+                format!("Tiles file \"{}\" not found!", tiles_json.display()).as_str());
+            let file_reader = BufReader::new(tiles_file);
+            // let json: serde_json::Value = serde_json::from_reader(file_reader)?;
+            self.tiles = serde_json::from_reader(file_reader)?;
+            for i in 0..self.tiles.len() {
+                let tile_id = self.tiles[i].id().clone();
+                if self.tiles_map.contains_key(&tile_id) {
+                    return Err(format!("Tile with ID \"{}\" already exists!", tile_id).into());
+                }
+                self.tiles_map.insert(tile_id, i);
+            }
+
+            // It's Environments turn
+            let environments_json = path.join(ENVS_JSON_NAME);
+            let environments_file = File::open(&environments_json).expect(
+                format!("Environments file \"{}\" not found!", tiles_json.display()).as_str());
+            let file_reader = BufReader::new(environments_file);
+            self.environments = serde_json::from_reader(file_reader)?;
+            for i in 0..self.environments.len() {
+                // Mapping string id of env to index of its position in Vec (no duplicates IDs)
+                let env_id = self.environments[i].id().clone();
+                if self.environments_map.contains_key(&env_id) {
+                    return Err(format!("Tile with ID \"{}\" already exists!", env_id).into());
+                }
+                // Check if all tiles used tiles correctly exist in memory
+                match self.environments[i].attributes() {
+                    EnvType::OpenWorld { tiles } => {
+                        for tile_attributes in tiles {
+                            if !self.tiles_map.contains_key(tile_attributes.id()) {
+                                return Err(format!("Tile ID \"{}\" doesn't exists!", tile_attributes.id()).into());
+                            }
+                        }
+                    }
+                    EnvType::Dungeon { .. } => {}
+                }
+            }
+        }
+        Ok(())
+    }
+    
+    pub fn get_tiles(&self) -> &Vec<Tile> {
+        &self.tiles
+    }
+    pub fn get_envs(&self) -> &Vec<Environment> {
+        &self.environments
+    }
+}

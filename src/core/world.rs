@@ -11,15 +11,15 @@ mod map;
 pub mod objs;
 mod event;
 
-pub struct World {
+pub struct World<'a> {
     pg: Character,
-    npc_list: Vec<dyn CharacterEntity>,
+    npc_list: Vec<Box<dyn CharacterEntity>>,
     world_map: WorldGrid,
     world_time: WorldTime,
-    buffered_command: Option<GameCommand>,
+    buffered_command: Option<GameCommand<'a>>,
 }
 
-impl World {
+impl<'a> World<'a> {
     pub fn new() -> Self {
         let pg = Character::build(
             CharacterAttributes {
@@ -51,7 +51,7 @@ impl World {
         }
     }
 
-    pub fn command(&mut self, command: GameCommand) {
+    pub fn command(&mut self, command: GameCommand<'a>) {
         self.buffered_command = Some(command);
     }
 }

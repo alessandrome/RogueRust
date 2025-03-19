@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "properties": {
+      "id": { "type": "string" },
+      "name": { "type": "string" },
+      "symbol": { "type": "string" },
+      "walking_cost": { "type": "integer" }
+    },
+    "required": ["id", "symbol", "walking_cost"]
+  }
+}
